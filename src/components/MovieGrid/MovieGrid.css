@@ -1,0 +1,57 @@
+/* styles/globals.css or styles/MovieGrid.module.css */
+.movie_category_title {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 16px;
+}
+.movie_category_title img {
+  width: 50px;
+  cursor: pointer;
+}
+.movie_category_title span {
+  font-size: 2rem;
+  cursor: pointer;
+}
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.movie-card {
+  background-color: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  border-bottom: 3px solid #444;
+}
+
+.movie-card a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+
+.movie-card h3 {
+  font-size: 1.1em;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.movie-card p {
+  font-size: 0.9em;
+  color: #ccc;
+}
