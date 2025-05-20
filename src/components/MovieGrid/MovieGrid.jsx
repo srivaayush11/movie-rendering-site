@@ -51,7 +51,7 @@ const MovieGrid = () => {
             className="movie-card"
             ref={index === apiData.length - 1 ? lastElementObserver : null}
           >
-            <Link href={`/movie/${movie.id}`}>
+            <Link to={`/player/${movie.id}`}>
               <img
                 className="movie-poster"
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
