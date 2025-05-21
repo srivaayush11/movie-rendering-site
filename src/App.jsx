@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { auth } from "./firebase";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import withLazyLoading from "./hocs/WithLazyLoading";
+import withLazyLoading from "./hocs";
 
 function App() {
   const navigate = useNavigate();
