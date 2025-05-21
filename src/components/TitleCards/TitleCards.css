@@ -22,6 +22,8 @@
 }
 .card-list .see-more {
   display: flex;
+  white-space: nowrap;
+  align-items: center;
 }
 .card-list .see-more img {
   height: 50px;

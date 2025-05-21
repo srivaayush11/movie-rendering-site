@@ -22,7 +22,7 @@ function Login() {
   };
   return loading ? (
     <div className="login-spinner">
-      <img src={netflix_spinner} alt="" />
+      <img src={netflix_spinner} alt="" loading="lazy" />
     </div>
   ) : (
     <div className="login">

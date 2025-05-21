@@ -1,17 +1,15 @@
 import "./App.css";
-import Home from "./pages/Home/Home";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Login from "./pages/Login/Login";
-import Player from "./pages/Player/Player";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "./firebase";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MovieGrid from "./components/MovieGrid/MovieGrid";
+import withLazyLoading from "./hocs/WithLazyLoading";
 
 function App() {
   const navigate = useNavigate();
+
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -21,6 +19,14 @@ function App() {
       }
     });
   }, []);
+
+  const Home = withLazyLoading(() => import("./pages/Home/Home"));
+  const Login = withLazyLoading(() => import("./pages/Login/Login"));
+  const Player = withLazyLoading(() => import("./pages/Player/Player"));
+  const MovieGrid = withLazyLoading(() =>
+    import("./pages/MovieGrid/MovieGrid")
+  );
+
   return (
     <div>
       <ToastContainer theme="dark" />
