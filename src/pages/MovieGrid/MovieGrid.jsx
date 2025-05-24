@@ -1,9 +1,8 @@
-// components/MovieGrid.js
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./MovieGrid.css";
 import back_arrow_icon from "../../assets/back_arrow_icon.png";
-import { getMovies } from "../../services/services";
+import { getMovies } from "../../services/movieServices";
 
 const MovieGrid = () => {
   const { title } = useParams();
@@ -18,8 +17,8 @@ const MovieGrid = () => {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const moviesData = await getMovies(category, pageNumber.current);
-    setApiData((prev) => [...prev, ...moviesData.results]);
+    const { data: moviesData } = await getMovies(category, pageNumber.current);
+    setApiData((prev) => [...prev, ...moviesData]);
     setLoading(false);
   }, []);
 
@@ -51,7 +50,7 @@ const MovieGrid = () => {
             className="movie-card"
             ref={index === apiData.length - 1 ? lastElementObserver : null}
           >
-            <Link to={`/player/${movie.id}`}>
+            <Link to={`/player/${movie.id}/${category}`}>
               <img
                 className="movie-poster"
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

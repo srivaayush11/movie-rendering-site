@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import "./TitleCards.css";
-import { getMovies } from "../../services/services.js";
+import { getMovies } from "../../services/movieServices.js";
 import { Link, useNavigate } from "react-router-dom";
 import { ContentContext } from "../../contexts/ContentContext.jsx";
 import back_arrow_icon from "../../assets/back_arrow_icon.png";
 
-function TitleCards({ title, category }) {
+function TitleCards({
+  title = "Popular on Netflix",
+  category = "TopicForYou",
+}) {
   const { content } = useContext(ContentContext);
   const navigate = useNavigate();
   const [apiData, setApiData] = useState([]);
@@ -17,8 +20,8 @@ function TitleCards({ title, category }) {
 
   useEffect(() => {
     (async function () {
-      const moviesData = await getMovies(category);
-      setApiData(moviesData.results);
+      const { data: moviesData } = await getMovies(category);
+      setApiData(moviesData);
       if (cardsRef.current) {
         cardsRef.current.addEventListener("wheel", handleWheel);
       }
@@ -27,24 +30,28 @@ function TitleCards({ title, category }) {
 
   const movieContentList = useMemo(() => {
     const filterBy = content === "adult";
-    return apiData.filter((movie) => movie.adult === filterBy) ?? [];
+    return apiData?.filter((movie) => movie.adult === filterBy) ?? [];
   }, [apiData, content]);
   return (
     <div className="title-cards">
       <h2
         onClick={() =>
-          navigate(`/movie/${title ? title : "Popular on Netflix"}`, {
+          navigate(`/movie/${title}`, {
             state: { category },
           })
         }
       >
-        {title ? title : "Popular on Netflix"}
+        {title}
       </h2>
 
       <div className="card-list" ref={cardsRef}>
         {movieContentList.length > 0
           ? movieContentList.map((card, index) => (
-              <Link to={`/player/${card.id}`} className="card" key={index}>
+              <Link
+                to={`/player/${card.id}/${category}`}
+                className="card"
+                key={index}
+              >
                 <img
                   src={`https://image.tmdb.org/t/p/w500` + card.poster_path}
                   alt=""
@@ -54,7 +61,7 @@ function TitleCards({ title, category }) {
               </Link>
             ))
           : `No movie for selected content ${content}`}
-        {movieContentList.length && (
+        {movieContentList.length > 0 && (
           <div className="see-more">
             <span>{"Explore more"}</span>
             <img

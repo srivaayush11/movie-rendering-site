@@ -33,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/player/:id" element={<Player />}></Route>
+        <Route path="/player/:id/:category" element={<Player />}></Route>
         <Route path="/movie/:title" element={<MovieGrid />}></Route>
       </Routes>
     </div>
