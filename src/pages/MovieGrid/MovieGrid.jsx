@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./MovieGrid.css";
 import back_arrow_icon from "../../assets/back_arrow_icon.png";
 import { getMovies } from "../../services/movieServices";
+import MovieSearch from "../../components/MovieSearch/MovieSearch";
 
 const MovieGrid = () => {
   const { title } = useParams();
@@ -39,9 +40,14 @@ const MovieGrid = () => {
 
   return (
     <div className="movie_list_container">
-      <div className="movie_category_title">
-        <img src={back_arrow_icon} alt="" onClick={() => navigate(-1)} />
-        <span>{title}</span>
+      <div className="movie_category_navbar">
+        <div className="movie_category_title">
+          <img src={back_arrow_icon} alt="" onClick={() => navigate(-1)} />
+          <span>{title}</span>
+        </div>
+        <div>
+          <MovieSearch allMovies={apiData} category={category} />
+        </div>
       </div>
       <div className="movie-grid">
         {apiData.map((movie, index) => (

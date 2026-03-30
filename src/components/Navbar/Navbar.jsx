@@ -1,16 +1,24 @@
 import React, { useEffect, useRef, useContext } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
-import search_icon from "../../assets/search_icon.svg";
 import bell_icon from "../../assets/bell_icon.svg";
 import profile_img from "../../assets/profile_img.png";
 import caret_icon from "../../assets/caret_icon.svg";
 import { logOut } from "../../firebase";
 import { ContentContext } from "../../contexts/ContentContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const navRef = useRef();
+  const navigate = useNavigate();
   const { content, setContent } = useContext(ContentContext);
+  const navTitleCategory = [
+    { title: "Popular on Netflix", category: "TopicForYou" },
+    { title: "Blockbuster Movies", category: "BlockBusterMovie" },
+    { title: "Only on Netflix", category: "OnlyOnNetflix" },
+    { title: "Upcoming", category: "UpcomingMovie" },
+    { title: "Top pics for you", category: "TopicForYou" },
+  ];
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -26,16 +34,20 @@ function Navbar() {
       <div className="navbar-left">
         <img src={logo} alt="" />
         <ul>
-          <li>Home</li>
-          <li>TV Shows</li>
-          <li>Movies</li>
-          <li>New & Popular</li>
-          <li>My List</li>
-          <li>Browse by languages</li>
+          {navTitleCategory.map(({ title, category }) => (
+            <li
+              onClick={() =>
+                navigate(`/movie/${title ? title : "Popular on Netflix"}`, {
+                  state: { category },
+                })
+              }
+            >
+              {title}
+            </li>
+          ))}
         </ul>
       </div>
       <div className="navbar-right">
-        <img src={search_icon} alt="" className="icons" />
         <div className="content">
           {content ?? "Choose content"}
           <div className="dropdown">

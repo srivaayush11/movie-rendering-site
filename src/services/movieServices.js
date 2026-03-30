@@ -4,12 +4,6 @@ const getMovies = async (category, pageNumber = 1, limit = 20) => {
     const endIndex = pageNumber * limit;
     const result = await import(`../../data/api${category}.js`);
     const paginatedItems = result.movie.slice(startIndex, endIndex);
-    console.info("paginatedItems", {
-      data: paginatedItems,
-      total: result.length,
-      page: pageNumber,
-      limit: limit,
-    });
     return {
       data: paginatedItems,
       total: result.length,

@@ -51,7 +51,7 @@ const login = async (email, password) => {
     toast.error(error.code.split("/")[1].split("-").join(" "));
   }
 };
-const logOut = () => {
-  signOut(auth);
+const logOut = async () => {
+  await signOut(auth);
 };
 export { auth, db, login, signUp, logOut };

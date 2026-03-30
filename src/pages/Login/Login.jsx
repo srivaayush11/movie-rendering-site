@@ -56,13 +56,6 @@ function Login() {
           <button onClick={userAuth} type="submit">
             {signState}
           </button>
-          <div className="form-help">
-            <div className="remember">
-              <input type="checkbox" />
-              <label>Remember Me</label>
-            </div>
-            <p>Need Help?</p>
-          </div>
         </form>
         <div className="form-switch">
           {signState === "Sign In" ? (

@@ -1,4 +1,10 @@
 /* styles/globals.css or styles/MovieGrid.module.css */
+.movie_category_navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px;
+}
 .movie_category_title {
   display: flex;
   align-items: center;
@@ -25,7 +31,9 @@
   background-color: #181818;
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .movie-card:hover {
